@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B6F66C12ACCE5F500494059 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F66C02ACCE5F500494059 /* AppDelegate.swift */; };
-		0B6F66C52ACCE5F500494059 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F66C42ACCE5F500494059 /* ViewController.swift */; };
+		0B6F66C52ACCE5F500494059 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F66C42ACCE5F500494059 /* ConversationsViewController.swift */; };
 		0B6F66CA2ACCE5F600494059 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F66C92ACCE5F600494059 /* Assets.xcassets */; };
 		0B6F66CD2ACCE5F600494059 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F66CB2ACCE5F600494059 /* LaunchScreen.storyboard */; };
 		0B6F66D62ACCED7900494059 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F66D52ACCED7900494059 /* AppCoordinator.swift */; };
@@ -25,7 +25,7 @@
 /* Begin PBXFileReference section */
 		0B6F66BD2ACCE5F500494059 /* chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6F66C02ACCE5F500494059 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0B6F66C42ACCE5F500494059 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0B6F66C42ACCE5F500494059 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
 		0B6F66C92ACCE5F600494059 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B6F66CC2ACCE5F600494059 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0B6F66CE2ACCE5F600494059 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,13 +143,12 @@
 		0BDA5F6D2AD7B073006F7A8A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0BDA5F702AD7B386006F7A8A /* LoginViewController.swift */,
-				0B6F66C42ACCE5F500494059 /* ViewController.swift */,
-				0BDA5F722AD7B3AB006F7A8A /* RegisterViewController.swift */,
-				0BDA5F742AD7B3DA006F7A8A /* PhotoViwerViewController.swift */,
-				0BDA5F762AD7B3FC006F7A8A /* VideoPlayerViewController.swift */,
+				0BDA5F7C2AD7B613006F7A8A /* Login */,
 				0BDA5F782AD7B43A006F7A8A /* NewConversationViewController.swift */,
+				0BDA5F742AD7B3DA006F7A8A /* PhotoViwerViewController.swift */,
 				0BDA5F7A2AD7B465006F7A8A /* ProfileViewController.swift */,
+				0BDA5F762AD7B3FC006F7A8A /* VideoPlayerViewController.swift */,
+				0B6F66C42ACCE5F500494059 /* ConversationsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -166,6 +165,15 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		0BDA5F7C2AD7B613006F7A8A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0BDA5F702AD7B386006F7A8A /* LoginViewController.swift */,
+				0BDA5F722AD7B3AB006F7A8A /* RegisterViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,7 +250,7 @@
 				0B6F66D62ACCED7900494059 /* AppCoordinator.swift in Sources */,
 				0BDA5F732AD7B3AB006F7A8A /* RegisterViewController.swift in Sources */,
 				0BDA5F772AD7B3FC006F7A8A /* VideoPlayerViewController.swift in Sources */,
-				0B6F66C52ACCE5F500494059 /* ViewController.swift in Sources */,
+				0B6F66C52ACCE5F500494059 /* ConversationsViewController.swift in Sources */,
 				0B6F66DA2ACCED9B00494059 /* Coordinator.swift in Sources */,
 				0BDA5F7B2AD7B465006F7A8A /* ProfileViewController.swift in Sources */,
 				0B6F66C12ACCE5F500494059 /* AppDelegate.swift in Sources */,

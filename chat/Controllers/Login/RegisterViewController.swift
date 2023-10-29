@@ -5,11 +5,11 @@
 //  Created by Jorge Alejndro Marcial Galvan on 11/10/23.
 //
 
+import FirebaseAuth
 import UIKit
 
 class RegisterViewController: UIViewController {
-
-    private var imageView: UIImageView!
+    var imageView: UIImageView!
     private var scrollView: UIScrollView!
     private var stackView: UIStackView!
     var lastNameField: UITextField!
@@ -33,6 +33,7 @@ class RegisterViewController: UIViewController {
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.clipsToBounds = true
+        scrollView.isUserInteractionEnabled = true
 
         stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,12 +42,19 @@ class RegisterViewController: UIViewController {
         stackView.spacing = 24
 
         imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person")
+        imageView.image = UIImage(systemName: "person.circle")
         imageView.tintColor = .gray
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
+        imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 50
+        imageView.layer.borderWidth = 2
+        imageView.layer.borderColor = UIColor.lightGray.cgColor
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapChangeProfilePic))
         imageView.addGestureRecognizer(gesture)
+        imageView.isUserInteractionEnabled = true
 
         firstNameField = UITextField()
         firstNameField.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +69,7 @@ class RegisterViewController: UIViewController {
         firstNameField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         firstNameField.leftViewMode = .always
         firstNameField.backgroundColor = .white
-        
+
         lastNameField = UITextField()
         lastNameField.translatesAutoresizingMaskIntoConstraints = false
         lastNameField.autocapitalizationType = .none
@@ -75,7 +83,7 @@ class RegisterViewController: UIViewController {
         lastNameField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         lastNameField.leftViewMode = .always
         lastNameField.backgroundColor = .white
-        
+
         emailField = UITextField()
         emailField.translatesAutoresizingMaskIntoConstraints = false
         emailField.autocapitalizationType = .none
@@ -104,7 +112,7 @@ class RegisterViewController: UIViewController {
         passwordField.leftViewMode = .always
         passwordField.backgroundColor = .white
         passwordField.isSecureTextEntry = true
-        
+
         registerButton = UIButton()
         registerButton.setTitle("Register", for: .normal)
         registerButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
@@ -114,7 +122,7 @@ class RegisterViewController: UIViewController {
         registerButton.layer.masksToBounds = true
         registerButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         registerButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        
+
         emailField.delegate = self
         passwordField.delegate = self
     }
@@ -143,32 +151,46 @@ class RegisterViewController: UIViewController {
             imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
         ])
     }
-    
-    @objc func loginButtonTapped(){
-        
+
+    @objc func loginButtonTapped() {
         emailField.resignFirstResponder()
         passwordField.resignFirstResponder()
         firstNameField.resignFirstResponder()
         lastNameField.resignFirstResponder()
-        
+
         guard let firstName = firstNameField.text,
-            let lastName = lastNameField.text,
-            let email = emailField.text,
-            let password = passwordField.text,
-                !firstName.isEmpty,
-                !lastName.isEmpty,
-                !email.isEmpty,
-                !password.isEmpty,
-        password.count >= 6 else{
+              let lastName = lastNameField.text,
+              let email = emailField.text,
+              let password = passwordField.text,
+              !firstName.isEmpty,
+              !lastName.isEmpty,
+              !email.isEmpty,
+              !password.isEmpty,
+              password.count >= 6 else {
             alertUserLoginError()
             return
         }
-        //Firebase Loign
+
+        // Firebase Register
+
+        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] authResult, error in
+            guard let strongSelf = self else {
+                return
+            }
+            guard let result = authResult, error == nil else {
+                print("Error creating user.")
+                return
+            }
+
+            let user = result.user
+            print("Created User: \(user)")
+            strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+        })
     }
-    
-    func alertUserLoginError(){
+
+    func alertUserLoginError() {
         let alert = UIAlertController(title: "Woops", message: "Please enter all information to create a new account.", preferredStyle: .alert)
-        
+
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
@@ -178,9 +200,8 @@ class RegisterViewController: UIViewController {
         vc.title = "Create Account"
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    @objc private func didTapChangeProfilePic(){
-        
-    }
 
+    @objc private func didTapChangeProfilePic() {
+        presentPhotoActionSheet()
+    }
 }

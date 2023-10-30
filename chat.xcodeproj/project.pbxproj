@@ -16,6 +16,10 @@
 		0B6F66DA2ACCED9B00494059 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F66D92ACCED9B00494059 /* Coordinator.swift */; };
 		0B8C9D1A2AE74DE500BCF0A9 /* LoginViewController+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C9D192AE74DE500BCF0A9 /* LoginViewController+Delegates.swift */; };
 		0B8C9D1C2AE750AE00BCF0A9 /* RegisterViewController+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C9D1B2AE750AE00BCF0A9 /* RegisterViewController+Delegates.swift */; };
+		0B94A3822AEF30FF003C39C0 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B94A3812AEF30FF003C39C0 /* DatabaseManager.swift */; };
+		0B94A3842AEF36E5003C39C0 /* ChatAppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B94A3832AEF36E5003C39C0 /* ChatAppUser.swift */; };
+		0B94A3892AEF51BB003C39C0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B94A3882AEF51BB003C39C0 /* MainController.swift */; };
+		0B94A38C2AEF556B003C39C0 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B94A38B2AEF556B003C39C0 /* TabController.swift */; };
 		0BC932932AEDC8B100F9C66F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0BC932922AEDC8B100F9C66F /* GoogleService-Info.plist */; };
 		0BDA5F712AD7B386006F7A8A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA5F702AD7B386006F7A8A /* LoginViewController.swift */; };
 		0BDA5F732AD7B3AB006F7A8A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA5F722AD7B3AB006F7A8A /* RegisterViewController.swift */; };
@@ -39,6 +43,10 @@
 		0B6F66D92ACCED9B00494059 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0B8C9D192AE74DE500BCF0A9 /* LoginViewController+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+Delegates.swift"; sourceTree = "<group>"; };
 		0B8C9D1B2AE750AE00BCF0A9 /* RegisterViewController+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegisterViewController+Delegates.swift"; sourceTree = "<group>"; };
+		0B94A3812AEF30FF003C39C0 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		0B94A3832AEF36E5003C39C0 /* ChatAppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAppUser.swift; sourceTree = "<group>"; };
+		0B94A3882AEF51BB003C39C0 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		0B94A38B2AEF556B003C39C0 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		0BC932922AEDC8B100F9C66F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0BDA5F702AD7B386006F7A8A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0BDA5F722AD7B3AB006F7A8A /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +73,7 @@
 		0B66F0792ACE5545004EE95B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0B94A3832AEF36E5003C39C0 /* ChatAppUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -83,6 +92,7 @@
 				0B6F66CB2ACCE5F600494059 /* LaunchScreen.storyboard */,
 				0B8C9D192AE74DE500BCF0A9 /* LoginViewController+Delegates.swift */,
 				0B8C9D1B2AE750AE00BCF0A9 /* RegisterViewController+Delegates.swift */,
+				0B94A3812AEF30FF003C39C0 /* DatabaseManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -156,9 +166,27 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		0B94A3872AEF51A9003C39C0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				0B94A3882AEF51BB003C39C0 /* MainController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		0B94A38A2AEF5502003C39C0 /* NavTab */ = {
+			isa = PBXGroup;
+			children = (
+				0B94A38B2AEF556B003C39C0 /* TabController.swift */,
+			);
+			path = NavTab;
+			sourceTree = "<group>";
+		};
 		0BDA5F6D2AD7B073006F7A8A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0B94A38A2AEF5502003C39C0 /* NavTab */,
+				0B94A3872AEF51A9003C39C0 /* Main */,
 				0B6F66C42ACCE5F500494059 /* ConversationsViewController.swift */,
 				0BDA5F782AD7B43A006F7A8A /* NewConversationViewController.swift */,
 				0BDA5F742AD7B3DA006F7A8A /* PhotoViwerViewController.swift */,
@@ -325,14 +353,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BDA5F712AD7B386006F7A8A /* LoginViewController.swift in Sources */,
+				0B94A38C2AEF556B003C39C0 /* TabController.swift in Sources */,
 				0B6F66D62ACCED7900494059 /* AppCoordinator.swift in Sources */,
 				0BDA5F732AD7B3AB006F7A8A /* RegisterViewController.swift in Sources */,
 				0BDA5F772AD7B3FC006F7A8A /* VideoPlayerViewController.swift in Sources */,
 				0B8C9D1C2AE750AE00BCF0A9 /* RegisterViewController+Delegates.swift in Sources */,
 				0B6F66C52ACCE5F500494059 /* ConversationsViewController.swift in Sources */,
+				0B94A3822AEF30FF003C39C0 /* DatabaseManager.swift in Sources */,
 				0B6F66DA2ACCED9B00494059 /* Coordinator.swift in Sources */,
+				0B94A3892AEF51BB003C39C0 /* MainController.swift in Sources */,
 				0BDA5F7B2AD7B465006F7A8A /* ProfileViewController.swift in Sources */,
 				0B8C9D1A2AE74DE500BCF0A9 /* LoginViewController+Delegates.swift in Sources */,
+				0B94A3842AEF36E5003C39C0 /* ChatAppUser.swift in Sources */,
 				0B6F66C12ACCE5F500494059 /* AppDelegate.swift in Sources */,
 				0B6F66D82ACCED8800494059 /* Context.swift in Sources */,
 				0BDA5F792AD7B43A006F7A8A /* NewConversationViewController.swift in Sources */,

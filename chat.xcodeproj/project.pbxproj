@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B51A3652AF33F25004D534B /* TableView+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B51A3642AF33F25004D534B /* TableView+Delegates.swift */; };
+		0B51A3672AF343E8004D534B /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B51A3662AF343E8004D534B /* TableViewCell.swift */; };
 		0B6F66C12ACCE5F500494059 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F66C02ACCE5F500494059 /* AppDelegate.swift */; };
 		0B6F66C52ACCE5F500494059 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F66C42ACCE5F500494059 /* ConversationsViewController.swift */; };
 		0B6F66CA2ACCE5F600494059 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F66C92ACCE5F600494059 /* Assets.xcassets */; };
@@ -32,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		0B26A72542B3ACE0322A03DE /* Pods_chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B51A3642AF33F25004D534B /* TableView+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Delegates.swift"; sourceTree = "<group>"; };
+		0B51A3662AF343E8004D534B /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		0B6F66BD2ACCE5F500494059 /* chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6F66C02ACCE5F500494059 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B6F66C42ACCE5F500494059 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +74,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B51A3622AF33BA5004D534B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0BDA5F7A2AD7B465006F7A8A /* ProfileViewController.swift */,
+				0B51A3642AF33F25004D534B /* TableView+Delegates.swift */,
+				0B51A3632AF33D74004D534B /* Cells */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		0B51A3632AF33D74004D534B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0B51A3662AF343E8004D534B /* TableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		0B66F0792ACE5545004EE95B /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -90,8 +112,6 @@
 			children = (
 				0B6F66C92ACCE5F600494059 /* Assets.xcassets */,
 				0B6F66CB2ACCE5F600494059 /* LaunchScreen.storyboard */,
-				0B8C9D192AE74DE500BCF0A9 /* LoginViewController+Delegates.swift */,
-				0B8C9D1B2AE750AE00BCF0A9 /* RegisterViewController+Delegates.swift */,
 				0B94A3812AEF30FF003C39C0 /* DatabaseManager.swift */,
 			);
 			path = Resources;
@@ -185,14 +205,14 @@
 		0BDA5F6D2AD7B073006F7A8A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0B94A38A2AEF5502003C39C0 /* NavTab */,
-				0B94A3872AEF51A9003C39C0 /* Main */,
 				0B6F66C42ACCE5F500494059 /* ConversationsViewController.swift */,
 				0BDA5F782AD7B43A006F7A8A /* NewConversationViewController.swift */,
 				0BDA5F742AD7B3DA006F7A8A /* PhotoViwerViewController.swift */,
-				0BDA5F7A2AD7B465006F7A8A /* ProfileViewController.swift */,
 				0BDA5F762AD7B3FC006F7A8A /* VideoPlayerViewController.swift */,
 				0BDA5F7C2AD7B613006F7A8A /* Login */,
+				0B94A3872AEF51A9003C39C0 /* Main */,
+				0B94A38A2AEF5502003C39C0 /* NavTab */,
+				0B51A3622AF33BA5004D534B /* Profile */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -215,7 +235,9 @@
 			isa = PBXGroup;
 			children = (
 				0BDA5F702AD7B386006F7A8A /* LoginViewController.swift */,
+				0B8C9D192AE74DE500BCF0A9 /* LoginViewController+Delegates.swift */,
 				0BDA5F722AD7B3AB006F7A8A /* RegisterViewController.swift */,
+				0B8C9D1B2AE750AE00BCF0A9 /* RegisterViewController+Delegates.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -356,12 +378,14 @@
 				0B94A38C2AEF556B003C39C0 /* TabController.swift in Sources */,
 				0B6F66D62ACCED7900494059 /* AppCoordinator.swift in Sources */,
 				0BDA5F732AD7B3AB006F7A8A /* RegisterViewController.swift in Sources */,
+				0B51A3672AF343E8004D534B /* TableViewCell.swift in Sources */,
 				0BDA5F772AD7B3FC006F7A8A /* VideoPlayerViewController.swift in Sources */,
 				0B8C9D1C2AE750AE00BCF0A9 /* RegisterViewController+Delegates.swift in Sources */,
 				0B6F66C52ACCE5F500494059 /* ConversationsViewController.swift in Sources */,
 				0B94A3822AEF30FF003C39C0 /* DatabaseManager.swift in Sources */,
 				0B6F66DA2ACCED9B00494059 /* Coordinator.swift in Sources */,
 				0B94A3892AEF51BB003C39C0 /* MainController.swift in Sources */,
+				0B51A3652AF33F25004D534B /* TableView+Delegates.swift in Sources */,
 				0BDA5F7B2AD7B465006F7A8A /* ProfileViewController.swift in Sources */,
 				0B8C9D1A2AE74DE500BCF0A9 /* LoginViewController+Delegates.swift in Sources */,
 				0B94A3842AEF36E5003C39C0 /* ChatAppUser.swift in Sources */,

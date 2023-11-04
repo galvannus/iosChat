@@ -28,7 +28,7 @@ class RegisterViewController: UIViewController {
     }
 
     private func setUpView() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register", style: .done, target: self, action: #selector(didTapRegister))
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register", style: .done, target: self, action: #selector(didTapRegister))
 
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false

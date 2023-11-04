@@ -24,7 +24,7 @@ class TabController: UITabBarController {
     // MARK: - Tab Setup
 
     private func setUpTabs() {
-        let home = createNav(with: "Home", and: UIImage(systemName: "house"), vc: MainController())
+        let home = createNav(with: "Chat", and: UIImage(systemName: "ellipsis.message"), vc: ConversationsViewController())
         home.navigationBar.prefersLargeTitles = true
 
         let profile = createNav(with: "Profile", and: UIImage(systemName: "person.crop.circle"), vc: ProfileViewController())

@@ -5,6 +5,7 @@
 //  Created by Jorge Alejndro Marcial Galvan on 11/10/23.
 //
 
+import FBSDKLoginKit
 import FirebaseAuth
 import UIKit
 
@@ -15,6 +16,7 @@ class LoginViewController: UIViewController {
     var emailField: UITextField!
     var passwordField: UITextField!
     private var loginButton: UIButton!
+    private var loginFacebookButton = FBLoginButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,8 +83,14 @@ class LoginViewController: UIViewController {
         loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
 
+        loginFacebookButton.center = view.center
+        loginFacebookButton.layer.cornerRadius = 12
+        loginFacebookButton.layer.masksToBounds = true
+        loginFacebookButton.permissions = ["public_profile", "email"]
+
         emailField.delegate = self
         passwordField.delegate = self
+        loginFacebookButton.delegate = self
     }
 
     private func setUpLayout() {
@@ -92,6 +100,7 @@ class LoginViewController: UIViewController {
         stackView.addArrangedSubview(emailField)
         stackView.addArrangedSubview(passwordField)
         stackView.addArrangedSubview(loginButton)
+        stackView.addArrangedSubview(loginFacebookButton)
 
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
@@ -147,4 +156,39 @@ class LoginViewController: UIViewController {
         vc.title = "Create Account"
         navigationController?.pushViewController(vc, animated: true)
     }
+}
+
+// MARK: - Login Facebook Delegate
+
+extension LoginViewController: LoginButtonDelegate {
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginKit.FBLoginButton) {
+        //No operation
+    }
+    
+    func loginButton(_ loginButton: FBSDKLoginKit.FBLoginButton, didCompleteWith result: FBSDKLoginKit.LoginManagerLoginResult?, error: Error?) {
+        guard let token = result?.token?.tokenString else{
+            print("User failed to log in with facebook.")
+            return
+        }
+        
+        let credential = FacebookAuthProvider.credential(withAccessToken: token)
+        
+        FirebaseAuth.Auth.auth().signIn(with: credential, completion: { [weak self] authResult, error in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            guard authResult != nil, error == nil else{
+                if let error = error{
+                    print("Facebook credential login failed, MFA may be needed. - \(error)")
+                }
+                return
+            }
+            
+            print("Successfully logged user in")
+            strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+        })
+    }
+    
+    
 }

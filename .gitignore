@@ -94,7 +94,7 @@ fastlane/test_output
 iOSInjectionProject/
 
 ### Xcode ###
-
+Secrets.xcconfig
 ## Xcode 8 and earlier
 
 ### Xcode Patch ###

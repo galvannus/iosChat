@@ -6,7 +6,9 @@
 //
 
 import FirebaseAuth
+import FBSDKLoginKit
 import UIKit
+import GoogleSignIn
 
 // MARK: - TableView
 
@@ -34,6 +36,19 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             guard let strongSelf = self else {
                 return
             }
+            
+            //Log out Facebook
+            FBSDKLoginKit.LoginManager().logOut()
+            
+            //Log out Google
+            GIDSignIn.sharedInstance.disconnect { error in
+                guard error == nil else { return }
+
+                // Google Account disconnected from your app.
+                // Perform clean-up actions, such as deleting data associated with the
+                //   disconnected account.
+            }
+            
             do {
                 try FirebaseAuth.Auth.auth().signOut()
 

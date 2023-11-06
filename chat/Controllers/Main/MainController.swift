@@ -1,5 +1,5 @@
 //
-//  TabController.swift
+//  MainController.swift
 //  chat
 //
 //  Created by Jorge Alejndro Marcial Galvan on 29/10/23.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TabController: UITabBarController {
+class MainController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTabs()

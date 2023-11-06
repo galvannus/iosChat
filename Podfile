@@ -6,10 +6,13 @@ target 'chat' do
   use_frameworks!
 
   # Firebase
-  pod 'Firebase/Core'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Database'
+  pod 'FirebaseCore'
+  pod 'FirebaseAuth'
+  pod 'FirebaseDatabase'
 
   # Facebook
   pod 'FBSDKLoginKit', '~> 16.2'
+  
+  # Google Sign In
+  pod 'GoogleSignIn'
 end

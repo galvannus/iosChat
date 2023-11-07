@@ -6,8 +6,8 @@
 //
 
 import FBSDKLoginKit
-import FirebaseCore
 import FirebaseAuth
+import FirebaseCore
 import GoogleSignIn
 import UIKit
 
@@ -21,13 +21,30 @@ class LoginViewController: UIViewController {
     private var loginFacebookButton = FBLoginButton()
     private var loginGoogleButton = GIDSignInButton()
 
+    private var loginObserver: NSObjectProtocol?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main, using: { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.navigationController?.dismiss(animated: true)
+        })
+
         view.backgroundColor = .white
         title = "Log In"
 
         setUpView()
         setUpLayout()
+    }
+
+    deinit {
+        if let observer = loginObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
 
     private func setUpView() {
@@ -90,7 +107,7 @@ class LoginViewController: UIViewController {
         loginFacebookButton.layer.cornerRadius = 12
         loginFacebookButton.layer.masksToBounds = true
         loginFacebookButton.permissions = ["public_profile", "email"]
-        
+
         loginGoogleButton.addTarget(self, action: #selector(signInWithGoogle), for: .touchUpInside)
 
         emailField.delegate = self
@@ -162,71 +179,56 @@ class LoginViewController: UIViewController {
         vc.title = "Create Account"
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    /*@objc private func loginGoogleTapped(){
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [weak self] signInResult, error in
-            guard let strongSelf = self, let signInResult = signInResult else {
+
+    @objc func signInWithGoogle() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else {
+            return
+        }
+
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
+            guard error == nil else {
                 return
             }
 
-            let user = signInResult.user
+            guard let user = signInResult?.user,
+                  let idToken = user.idToken?.tokenString else {
+                print("missing auth object off of google user")
+                return
+            }
 
-            let emailAddress = user.profile?.email
+            print("did sign in with google: \(user)")
 
-            let fullName = user.profile?.name
-            let givenName = user.profile?.givenName
-            let familyName = user.profile?.familyName
-            
-            strongSelf.navigationController?.dismiss(animated: true, completion: nil)
-            // If sign in succeeded, display the app's main content View.
-          }
-    }*/
-    
-    @objc func signInWithGoogle() {
-            
-            guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+            guard let email = user.profile?.email,
+                  let firstName = user.profile?.givenName,
+                  let lastName = user.profile?.familyName else {
+                return
+            }
 
-            // Create Google Sign In configuration object.
-            let config = GIDConfiguration(clientID: clientID)
-            GIDSignIn.sharedInstance.configuration = config
-            
-            GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
-                guard error == nil else { return }
-
-                guard let user = signInResult?.user,
-                      let idToken = user.idToken?.tokenString else {
-                    print("missing auth object off of google user")
-                    return
-                }
-                
-                print("did sign in with google: \(user)")
-                
-                guard let email = user.profile?.email,
-                      let firstName = user.profile?.givenName,
-                      let lastName = user.profile?.familyName else { return }
-                
-                DatabaseManager.shared.userExists(with: email) { exists in
-                    if !exists {
-                        //insert to database
-                        DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName, lastName: lastName, emailAdress: email))
-                    }
-                }
-                
-                let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
-                // If sign in succeeded, display the app's main content View.
-                
-                FirebaseAuth.Auth.auth().signIn(with: credential) { authResult, error in
-                    guard authResult != nil, error == nil else {
-                        print("failed to log in with google credential")
-                        return
-                    }
-                    
-                    print("successfully signed in with google")
-                    //NotificationCenter.default.post(name: .didLogInNotification, object: nil)
+            DatabaseManager.shared.userExists(with: email) { exists in
+                if !exists {
+                    // insert to database
+                    DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName, lastName: lastName, emailAdress: email))
                 }
             }
+
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+            // If sign in succeeded, display the app's main content View.
+
+            FirebaseAuth.Auth.auth().signIn(with: credential) { authResult, error in
+                guard authResult != nil, error == nil else {
+                    print("failed to log in with google credential")
+                    return
+                }
+
+                print("successfully signed in with google")
+                NotificationCenter.default.post(name: .didLogInNotification, object: nil)
+            }
         }
-     
+    }
 }
 
 // MARK: - Login Facebook Delegate
@@ -248,8 +250,8 @@ extension LoginViewController: LoginButtonDelegate {
                                                          parameters: ["fields": "email, name"],
                                                          tokenString: token,
                                                          version: nil, httpMethod: .get)
-        //print("Despues de request.")
-        
+        // print("Despues de request.")
+
         // Execute request
         facebookRequest.start(completion: { _, result, error in
             // Get email and facebook
@@ -264,7 +266,7 @@ extension LoginViewController: LoginButtonDelegate {
                 print("Failed to get email and name from facebook result.")
                 return
             }
-            
+
             print("Config user email.")
             // Split name
             let nameComponents = userName.components(separatedBy: " ")
@@ -275,7 +277,7 @@ extension LoginViewController: LoginButtonDelegate {
 
             let firstName = nameComponents[0]
             let lastName = "\(nameComponents[1]) \(nameComponents[2])"
-            
+
             print("Split data.")
 
             // Check if the email exists

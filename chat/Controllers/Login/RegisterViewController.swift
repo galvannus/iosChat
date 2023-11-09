@@ -7,6 +7,7 @@
 
 import FirebaseAuth
 import UIKit
+import JGProgressHUD
 
 class RegisterViewController: UIViewController {
     var imageView: UIImageView!
@@ -17,6 +18,7 @@ class RegisterViewController: UIViewController {
     var passwordField: UITextField!
     var firstNameField: UITextField!
     private var registerButton: UIButton!
+    var spinner: JGProgressHUD!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,6 +124,9 @@ class RegisterViewController: UIViewController {
         registerButton.layer.masksToBounds = true
         registerButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         registerButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        
+        spinner = JGProgressHUD()
+        spinner.style = .dark
 
         emailField.delegate = self
         passwordField.delegate = self
@@ -170,12 +175,18 @@ class RegisterViewController: UIViewController {
             alertUserLoginError()
             return
         }
+        
+        spinner.show(in: view)
 
-        // Firebase Register
+        // Firebase Log In
 
         DatabaseManager.shared.userExists(with: email, completion: { [weak self] exists in
             guard let strongSelf = self else {
                 return
+            }
+            
+            DispatchQueue.main.async {
+                strongSelf.spinner.dismiss()
             }
             
             guard !exists else {

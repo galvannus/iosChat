@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseCore
 import GoogleSignIn
 import UIKit
+import JGProgressHUD
 
 class LoginViewController: UIViewController {
     private var imageView: UIImageView!
@@ -20,6 +21,7 @@ class LoginViewController: UIViewController {
     private var loginButton: UIButton!
     private var loginFacebookButton = FBLoginButton()
     private var loginGoogleButton = GIDSignInButton()
+    var spinner: JGProgressHUD!
 
     private var loginObserver: NSObjectProtocol?
 
@@ -109,6 +111,9 @@ class LoginViewController: UIViewController {
         loginFacebookButton.permissions = ["public_profile", "email"]
 
         loginGoogleButton.addTarget(self, action: #selector(signInWithGoogle), for: .touchUpInside)
+        
+        spinner = JGProgressHUD()
+        spinner.style = .dark
 
         emailField.delegate = self
         passwordField.delegate = self
@@ -149,11 +154,17 @@ class LoginViewController: UIViewController {
             alertUserLoginError()
             return
         }
+        
+        spinner.show(in: view)
 
         // Firebase Loign
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] authResult, error in
             guard let strongSelf = self else {
                 return
+            }
+            
+            DispatchQueue.main.async {
+                strongSelf.spinner.dismiss()
             }
 
             guard let result = authResult, error == nil else {

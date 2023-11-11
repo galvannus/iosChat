@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B017D4B2AF860010097F951 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B017D4A2AF860010097F951 /* GoogleService-Info.plist */; };
+		0B3579462AFDE74400AE9A85 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3579452AFDE74400AE9A85 /* StorageManager.swift */; };
 		0B459F482AFC63A000736557 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B459F472AFC63A000736557 /* Message.swift */; };
 		0B459F4A2AFC645F00736557 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B459F492AFC645F00736557 /* Sender.swift */; };
 		0B51A3652AF33F25004D534B /* TableView+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B51A3642AF33F25004D534B /* TableView+Delegates.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		0B017D4A2AF860010097F951 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0B26A72542B3ACE0322A03DE /* Pods_chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B3579452AFDE74400AE9A85 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		0B459F472AFC63A000736557 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		0B459F492AFC645F00736557 /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
 		0B51A3642AF33F25004D534B /* TableView+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Delegates.swift"; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				0B6F66C92ACCE5F600494059 /* Assets.xcassets */,
 				0B6F66CB2ACCE5F600494059 /* LaunchScreen.storyboard */,
 				0B94A3812AEF30FF003C39C0 /* DatabaseManager.swift */,
+				0B3579452AFDE74400AE9A85 /* StorageManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				0B51A3652AF33F25004D534B /* TableView+Delegates.swift in Sources */,
 				0BDA5F7B2AD7B465006F7A8A /* ProfileViewController.swift in Sources */,
 				0B8C9D1A2AE74DE500BCF0A9 /* LoginViewController+Delegates.swift in Sources */,
+				0B3579462AFDE74400AE9A85 /* StorageManager.swift in Sources */,
 				0B94A3842AEF36E5003C39C0 /* ChatAppUser.swift in Sources */,
 				0B6F66C12ACCE5F500494059 /* AppDelegate.swift in Sources */,
 				0B6F66D82ACCED8800494059 /* Context.swift in Sources */,

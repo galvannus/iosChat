@@ -12,7 +12,6 @@ import JGProgressHUD
 class ConversationsViewController: UIViewController {
     
     private var tableView: UITableView!
-    private var noConversationLabel: UILabel!
     var spinner: JGProgressHUD!
 
     override func viewDidLoad() {
@@ -50,15 +49,6 @@ class ConversationsViewController: UIViewController {
         tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
-
-        /*noConversationLabel = UILabel()
-        noConversationLabel.translatesAutoresizingMaskIntoConstraints = false
-        noConversationLabel.text = "No Conversations!"
-        noConversationLabel.textAlignment = .center
-        noConversationLabel.textColor = .gray
-        noConversationLabel.font = .systemFont(ofSize: 21, weight: .medium)
-        noConversationLabel.isHidden = true
-         */
         
         spinner = JGProgressHUD()
         spinner.style = .dark
@@ -66,7 +56,6 @@ class ConversationsViewController: UIViewController {
 
     private func setUpLayout() {
         view.addSubview(tableView)
-        //tableView.addSubview(noConversationLabel)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),

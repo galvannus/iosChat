@@ -173,6 +173,9 @@ class LoginViewController: UIViewController {
             }
 
             let user = result.user
+            
+            UserDefaults.standard.set(email, forKey: "email")
+            
             print("Logged In User \(user)")
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)
         })
@@ -218,10 +221,12 @@ class LoginViewController: UIViewController {
                   let lastName = user.profile?.familyName else {
                 return
             }
+            
+            UserDefaults.standard.set(email, forKey: "email")
 
             DatabaseManager.shared.userExists(with: email) { exists in
                 if !exists {
-                    let chatUser = ChatAppUser(firstName: firstName, lastName: lastName, emailAdress: email)
+                    let chatUser = ChatAppUser(firstName: firstName, lastName: lastName, emailAddress: email)
                     // insert to database
                     DatabaseManager.shared.insertUser(with: chatUser, completion: { success in
                         if success {
@@ -313,6 +318,8 @@ extension LoginViewController: LoginButtonDelegate {
                 return
             }
             
+            UserDefaults.standard.set(email, forKey: "email")
+            
             // Split name
             /*
             let nameComponents = userName.components(separatedBy: " ")
@@ -329,7 +336,7 @@ extension LoginViewController: LoginButtonDelegate {
             // Check if the email exists
             DatabaseManager.shared.userExists(with: email, completion: { exists in
                 if !exists {
-                    let chatUser = ChatAppUser(firstName: firstName, lastName: lastName, emailAdress: email)
+                    let chatUser = ChatAppUser(firstName: firstName, lastName: lastName, emailAddress: email)
                     // Insert into the DB
                     DatabaseManager.shared.insertUser(with: chatUser, completion: { success in
                         if success {

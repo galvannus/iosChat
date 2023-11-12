@@ -40,7 +40,7 @@ class TableViewCell: UITableViewCell {
         // Configuración de los constraints
         NSLayoutConstraint.activate([
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             /* titleLabel.widthAnchor.constraint(equalToConstant: 100),
                 titleLabel.heightAnchor.constraint(equalToConstant: 40), */
         ])

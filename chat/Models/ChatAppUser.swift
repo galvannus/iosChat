@@ -10,10 +10,10 @@ import Foundation
 struct ChatAppUser{
     let firstName: String
     let lastName: String
-    let emailAdress: String
+    let emailAddress: String
     
     var safeEmail: String{
-        var safeEmail = emailAdress.replacingOccurrences(of: ".", with: "-")
+        var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
         safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
         return safeEmail
     }

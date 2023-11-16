@@ -225,6 +225,7 @@ class LoginViewController: UIViewController {
             UserDefaults.standard.set(email, forKey: "email")
 
             DatabaseManager.shared.userExists(with: email) { exists in
+                //print("Existe \(email): \(exists)")
                 if !exists {
                     let chatUser = ChatAppUser(firstName: firstName, lastName: lastName, emailAddress: email)
                     // insert to database

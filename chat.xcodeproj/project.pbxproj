@@ -20,6 +20,7 @@
 		0B6F66D62ACCED7900494059 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F66D52ACCED7900494059 /* AppCoordinator.swift */; };
 		0B6F66D82ACCED8800494059 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F66D72ACCED8800494059 /* Context.swift */; };
 		0B6F66DA2ACCED9B00494059 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F66D92ACCED9B00494059 /* Coordinator.swift */; };
+		0B76DB892B05D12E00DBBBCB /* ChatViewController+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B76DB882B05D12E00DBBBCB /* ChatViewController+Delegates.swift */; };
 		0B8C9D1A2AE74DE500BCF0A9 /* LoginViewController+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C9D192AE74DE500BCF0A9 /* LoginViewController+Delegates.swift */; };
 		0B8C9D1C2AE750AE00BCF0A9 /* RegisterViewController+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C9D1B2AE750AE00BCF0A9 /* RegisterViewController+Delegates.swift */; };
 		0B94A3822AEF30FF003C39C0 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B94A3812AEF30FF003C39C0 /* DatabaseManager.swift */; };
@@ -57,6 +58,7 @@
 		0B6F66D52ACCED7900494059 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		0B6F66D72ACCED8800494059 /* Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 		0B6F66D92ACCED9B00494059 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		0B76DB882B05D12E00DBBBCB /* ChatViewController+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+Delegates.swift"; sourceTree = "<group>"; };
 		0B8C9D192AE74DE500BCF0A9 /* LoginViewController+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+Delegates.swift"; sourceTree = "<group>"; };
 		0B8C9D1B2AE750AE00BCF0A9 /* RegisterViewController+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegisterViewController+Delegates.swift"; sourceTree = "<group>"; };
 		0B94A3812AEF30FF003C39C0 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				0B9C5C3B2AFB17A400BEAA54 /* ChatViewController.swift */,
+				0B76DB882B05D12E00DBBBCB /* ChatViewController+Delegates.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				0B6F66DA2ACCED9B00494059 /* Coordinator.swift in Sources */,
 				0B51A3652AF33F25004D534B /* TableView+Delegates.swift in Sources */,
 				0BDA5F7B2AD7B465006F7A8A /* ProfileViewController.swift in Sources */,
+				0B76DB892B05D12E00DBBBCB /* ChatViewController+Delegates.swift in Sources */,
 				0B8C9D1A2AE74DE500BCF0A9 /* LoginViewController+Delegates.swift in Sources */,
 				0B3579462AFDE74400AE9A85 /* StorageManager.swift in Sources */,
 				0B94A3842AEF36E5003C39C0 /* ChatAppUser.swift in Sources */,

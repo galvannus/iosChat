@@ -28,5 +28,12 @@ extension NewConversationViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         //Start Conversation
+        let targetUserData = results[indexPath.row]
+        
+        dismiss(animated: true, completion: { [weak self] in
+            self?.completion?(targetUserData)
+        })
+        
+        
     }
 }

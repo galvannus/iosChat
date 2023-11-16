@@ -6,11 +6,10 @@
 //
 
 import FirebaseAuth
-import UIKit
 import JGProgressHUD
+import UIKit
 
 class ConversationsViewController: UIViewController {
-    
     private var tableView: UITableView!
     var spinner: JGProgressHUD!
 
@@ -40,23 +39,22 @@ class ConversationsViewController: UIViewController {
     }
 
     private func setUpView() {
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapComposeButton))
-        
+
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(ConversationsTableViewCell.self, forCellReuseIdentifier: ConversationsTableViewCell.id)
         tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
-        
+
         spinner = JGProgressHUD()
         spinner.style = .dark
     }
 
     private func setUpLayout() {
         view.addSubview(tableView)
-        
+
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -68,10 +66,27 @@ class ConversationsViewController: UIViewController {
     private func fetchConversations() {
         tableView.isHidden = false
     }
-    
-    @objc private func didTapComposeButton(){
+
+    @objc private func didTapComposeButton() {
         let vc = NewConversationViewController()
+        vc.completion = { [weak self] result in
+            // print("\(result)")
+            self?.createNewConversation(result: result)
+        }
         let navVC = UINavigationController(rootViewController: vc)
         present(navVC, animated: true)
+    }
+
+    private func createNewConversation(result: [String: String]) {
+        guard let name = result["name"],
+              let email = result["email"] else {
+            return
+        }
+
+        let vc = ChatViewController(with: email)
+        vc.isNewConversation = true
+        vc.title = name
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

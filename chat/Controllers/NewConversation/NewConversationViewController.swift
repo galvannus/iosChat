@@ -16,6 +16,7 @@ class NewConversationViewController: UIViewController {
     private var users = [[String: String]]()
     var results = [[String: String]]()
     private var hasFetched = false
+    public var completion: (([String: String]) -> (Void))?
 
     override func viewDidLoad() {
         super.viewDidLoad()

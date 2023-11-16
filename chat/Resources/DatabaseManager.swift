@@ -101,19 +101,44 @@ extension DatabaseManager {
             completion(true)
         })
     }
-    
-    public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void){
+
+    public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
         database.child("users").observeSingleEvent(of: .value, with: { snapshot in
-            guard let value = snapshot.value as? [[String: String]] else{
+            guard let value = snapshot.value as? [[String: String]] else {
                 completion(.failure(DatabaseError.failedToFetch))
                 return
             }
-            
+
             completion(.success(value))
         })
     }
-    
-    public enum DatabaseError: Error{
+
+    public enum DatabaseError: Error {
         case failedToFetch
+    }
+}
+
+// MARK: - Sending Messages / Conversations
+
+extension DatabaseManager {
+    
+    //Creates a new conversation with target user, email and first message sent
+    public func createNewConversation(width otherUserEmail: String, firstMessage: Message, completion: @escaping (Bool) -> Void){
+        
+    }
+    
+    //Fetch and returns all conversations for the user with passed in email
+    public func getAllConversations(for email: String, completion: @escaping (Result<String, Error>) -> Void){
+        
+    }
+    
+    //Get all messages for a given conversation
+    public func getAllMessagesForConversation(with id: String, completion: (Result<String, Error>) -> Void){
+        //
+    }
+    
+    //Sends a message with target conversation and message
+    public func sendMessage(to conversation: String, message: Message, completion: @escaping (Bool) -> Void){
+        
     }
 }

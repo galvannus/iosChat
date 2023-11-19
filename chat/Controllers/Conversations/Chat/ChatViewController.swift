@@ -11,11 +11,25 @@ import InputBarAccessoryView
 
 class ChatViewController: MessagesViewController {
     
+    public static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ss"
+        formatter.locale = .current
+        return formatter
+    }()
+    
     public let otherUserEmail: String
     public var isNewConversation = false
     
     var messages = [Message]()
-    let selfSender = Sender(photoURL: "", senderId: "1", displayName: "Jorge Marcial")
+    
+    var selfSender: Sender? {
+        guard let email = UserDefaults.standard.value(forKey: "email") as? String else{
+            return nil
+        }
+        
+        return Sender(photoURL: "", senderId: email, displayName: "Jorge Marcial")
+    }
     
     init(with email: String) {
         self.otherUserEmail = email

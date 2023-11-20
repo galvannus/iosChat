@@ -12,6 +12,8 @@ import UIKit
 class ConversationsViewController: UIViewController {
     private var tableView: UITableView!
     var spinner: JGProgressHUD!
+    
+    var conversations = [Conversation]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,7 @@ class ConversationsViewController: UIViewController {
         setUpView()
         setUpLayout()
         fetchConversations()
+        startListeningForConversations()
     }
 
     private func validateAuth() {
@@ -88,5 +91,30 @@ class ConversationsViewController: UIViewController {
         vc.title = name
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func startListeningForConversations(){
+        guard let email = UserDefaults.standard.value(forKey: "email") as? String else{
+            return
+        }
+        print("Starting conversation fetch.")
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        DatabaseManager.shared.getAllConversations(for: safeEmail, completion: { [weak self] result in
+            switch result {
+            case .success(let conversations):
+                print("suceesfully got conversation models")
+                guard !conversations.isEmpty else{
+                    return
+                }
+                
+                self?.conversations = conversations
+                
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("Failed to get conversations: \(error)")
+            }
+        })
     }
 }

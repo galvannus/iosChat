@@ -10,15 +10,17 @@ import UIKit
 
 extension ConversationsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return conversations.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let model = conversations[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ConversationsTableViewCell.id, for: indexPath) as?
             ConversationsTableViewCell else {
             fatalError("Could not cast ConversationsTableViewCell")
         }
-        cell.setUp(name: "Hello World!!")
+        
+        cell.configure(with: model)
         cell.accessoryType = .disclosureIndicator
 
         return cell
@@ -26,10 +28,15 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let model = conversations[indexPath.row]
 
-        let vc = ChatViewController(with: "sdfsd@gmail.com")
-        vc.title = "Ale Galvan"
+        let vc = ChatViewController(with: model.otherUserEmail)
+        vc.title = model.name
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
     }
 }

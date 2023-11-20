@@ -31,6 +31,9 @@
 		0B9C5C3A2AFB126A00BEAA54 /* ConversationsTableView+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9C5C392AFB126A00BEAA54 /* ConversationsTableView+Delegates.swift */; };
 		0B9C5C3C2AFB17A400BEAA54 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9C5C3B2AFB17A400BEAA54 /* ChatViewController.swift */; };
 		0B9C5C3F2AFB35E400BEAA54 /* ConversationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9C5C3E2AFB35E400BEAA54 /* ConversationsTableViewCell.swift */; };
+		0BC2DB1D2B0AC23200CE02EE /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC2DB1C2B0AC23200CE02EE /* ConversationTableViewCell.swift */; };
+		0BC2DB1F2B0ACB0500CE02EE /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC2DB1E2B0ACB0500CE02EE /* Conversation.swift */; };
+		0BC2DB212B0ACBA200CE02EE /* LatestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC2DB202B0ACBA200CE02EE /* LatestMessage.swift */; };
 		0BDA5F712AD7B386006F7A8A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA5F702AD7B386006F7A8A /* LoginViewController.swift */; };
 		0BDA5F732AD7B3AB006F7A8A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA5F722AD7B3AB006F7A8A /* RegisterViewController.swift */; };
 		0BDA5F752AD7B3DA006F7A8A /* PhotoViwerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA5F742AD7B3DA006F7A8A /* PhotoViwerViewController.swift */; };
@@ -69,6 +72,9 @@
 		0B9C5C392AFB126A00BEAA54 /* ConversationsTableView+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationsTableView+Delegates.swift"; sourceTree = "<group>"; };
 		0B9C5C3B2AFB17A400BEAA54 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0B9C5C3E2AFB35E400BEAA54 /* ConversationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsTableViewCell.swift; sourceTree = "<group>"; };
+		0BC2DB1C2B0AC23200CE02EE /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
+		0BC2DB1E2B0ACB0500CE02EE /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		0BC2DB202B0ACBA200CE02EE /* LatestMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestMessage.swift; sourceTree = "<group>"; };
 		0BDA5F702AD7B386006F7A8A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0BDA5F722AD7B3AB006F7A8A /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		0BDA5F742AD7B3DA006F7A8A /* PhotoViwerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViwerViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +131,8 @@
 				0B94A3832AEF36E5003C39C0 /* ChatAppUser.swift */,
 				0B459F472AFC63A000736557 /* Message.swift */,
 				0B459F492AFC645F00736557 /* Sender.swift */,
+				0BC2DB1E2B0ACB0500CE02EE /* Conversation.swift */,
+				0BC2DB202B0ACBA200CE02EE /* LatestMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -285,6 +293,7 @@
 		0BDA5F6F2AD7B134006F7A8A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0BC2DB1C2B0AC23200CE02EE /* ConversationTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -434,6 +443,7 @@
 			files = (
 				0BDA5F712AD7B386006F7A8A /* LoginViewController.swift in Sources */,
 				0B94A38C2AEF556B003C39C0 /* MainController.swift in Sources */,
+				0BC2DB1F2B0ACB0500CE02EE /* Conversation.swift in Sources */,
 				0B6F66D62ACCED7900494059 /* AppCoordinator.swift in Sources */,
 				0B9C5C3A2AFB126A00BEAA54 /* ConversationsTableView+Delegates.swift in Sources */,
 				0BDA5F732AD7B3AB006F7A8A /* RegisterViewController.swift in Sources */,
@@ -449,6 +459,7 @@
 				0BDA5F7B2AD7B465006F7A8A /* ProfileViewController.swift in Sources */,
 				0B76DB892B05D12E00DBBBCB /* ChatViewController+Delegates.swift in Sources */,
 				0B8C9D1A2AE74DE500BCF0A9 /* LoginViewController+Delegates.swift in Sources */,
+				0BC2DB212B0ACBA200CE02EE /* LatestMessage.swift in Sources */,
 				0B3579462AFDE74400AE9A85 /* StorageManager.swift in Sources */,
 				0B94A3842AEF36E5003C39C0 /* ChatAppUser.swift in Sources */,
 				0B6F66C12ACCE5F500494059 /* AppDelegate.swift in Sources */,
@@ -456,6 +467,7 @@
 				0B6F66D82ACCED8800494059 /* Context.swift in Sources */,
 				0B459F482AFC63A000736557 /* Message.swift in Sources */,
 				0BDA5F792AD7B43A006F7A8A /* NewConversationViewController.swift in Sources */,
+				0BC2DB1D2B0AC23200CE02EE /* ConversationTableViewCell.swift in Sources */,
 				0B9C5C3F2AFB35E400BEAA54 /* ConversationsTableViewCell.swift in Sources */,
 				0B9C5C3C2AFB17A400BEAA54 /* ChatViewController.swift in Sources */,
 				0BDA5F752AD7B3DA006F7A8A /* PhotoViwerViewController.swift in Sources */,

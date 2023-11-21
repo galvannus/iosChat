@@ -19,6 +19,7 @@ class ChatViewController: MessagesViewController {
     }()
     
     public let otherUserEmail: String
+    private let conversationId: String?
     public var isNewConversation = false
     
     var messages = [Message]()
@@ -27,11 +28,13 @@ class ChatViewController: MessagesViewController {
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else{
             return nil
         }
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
         
-        return Sender(photoURL: "", senderId: email, displayName: "Jorge Marcial")
+        return Sender(photoURL: "", senderId: safeEmail, displayName: "Me")
     }
     
-    init(with email: String) {
+    init(with email: String, id: String?) {
+        self.conversationId = id
         self.otherUserEmail = email
         super.init(nibName: nil, bundle: nil)
     }
@@ -57,6 +60,32 @@ class ChatViewController: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
+        
+        if let conversationId = conversationId{
+            listenForMessages(id: conversationId, shouldScrollToBottom: true)
+        }
+    }
+    
+    private func listenForMessages(id: String, shouldScrollToBottom: Bool){
+        DatabaseManager.shared.getAllMessagesForConversation(with: id, completion: { [weak self] result in
+            switch result {
+            case .success(let messages):
+                guard !messages.isEmpty else{
+                    return
+                }
+                self?.messages = messages
+                
+                DispatchQueue.main.async {
+                    self?.messagesCollectionView.reloadDataAndKeepOffset()
+                    
+                    if shouldScrollToBottom{
+                        self?.messagesCollectionView.scrollToLastItem()
+                    }
+                }
+            case .failure(let error):
+                print("Failed to get messages: \(error)")
+            }
+        })
     }
 }
 

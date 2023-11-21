@@ -38,9 +38,9 @@ class ConversationsTableViewCell: UITableViewCell {
         userImageView.clipsToBounds = true // Activar bordes
         userImageView.backgroundColor = .blue
 
-        userNameLabel.font = .systemFont(ofSize: 21, weight: .semibold)
+        userNameLabel.font = .systemFont(ofSize: 18, weight: .semibold)
 
-        userMessageLabel.font = .systemFont(ofSize: 19, weight: .regular)
+        userMessageLabel.font = .systemFont(ofSize: 16, weight: .regular)
         userMessageLabel.numberOfLines = 0
 
         [userImageView, userNameLabel, userMessageLabel].forEach {
@@ -50,17 +50,20 @@ class ConversationsTableViewCell: UITableViewCell {
 
         // Configuración de los constraints
         NSLayoutConstraint.activate([
-            userImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            userImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            userImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            userImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             userImageView.widthAnchor.constraint(equalToConstant: 60),
             userImageView.heightAnchor.constraint(equalToConstant: 60),
 
-            userNameLabel.centerYAnchor.constraint(equalTo: userImageView.centerYAnchor, constant: 9),
-            userNameLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor),
-            userNameLabel.widthAnchor.constraint(equalToConstant: 100),
-            userNameLabel.heightAnchor.constraint(equalToConstant: 40),
+            //userNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            userNameLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 10),
+            //userNameLabel.widthAnchor.constraint(equalToConstant: 120),
+            //userNameLabel.heightAnchor.constraint(equalToConstant: 40),
+            userNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
 
-            userMessageLabel.bottomAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 5),
+            userMessageLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 10),
+            //userMessageLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            userMessageLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 5),
             // userMessageLabel.centerYAnchor.constraint(equalTo: userImageView.centerYAnchor, constant: 9)
         ])
     }
@@ -73,11 +76,10 @@ class ConversationsTableViewCell: UITableViewCell {
         StorageManager.shared.downloadURL(for: path, completion: { [weak self] result in
             switch result {
             case .success(let url):
-                print(url)
-                DispatchQueue.main.sync {
+                /*DispatchQueue.main.sync {
                     self?.userImageView.sd_setImage(with: url)
-                }
-                print("Reload.")
+                }*/
+                self?.userImageView.sd_setImage(with: url)
             case .failure(let error):
                 print("Failed to get image url: \(error)")
             }

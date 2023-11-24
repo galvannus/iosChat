@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B017D4B2AF860010097F951 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B017D4A2AF860010097F951 /* GoogleService-Info.plist */; };
 		0B3579462AFDE74400AE9A85 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3579452AFDE74400AE9A85 /* StorageManager.swift */; };
+		0B3DA96E2B103E8600A08F4F /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3DA96D2B103E8600A08F4F /* Media.swift */; };
 		0B459F482AFC63A000736557 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B459F472AFC63A000736557 /* Message.swift */; };
 		0B459F4A2AFC645F00736557 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B459F492AFC645F00736557 /* Sender.swift */; };
 		0B51A3652AF33F25004D534B /* TableView+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B51A3642AF33F25004D534B /* TableView+Delegates.swift */; };
@@ -47,6 +48,7 @@
 		0B017D4A2AF860010097F951 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0B26A72542B3ACE0322A03DE /* Pods_chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B3579452AFDE74400AE9A85 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		0B3DA96D2B103E8600A08F4F /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		0B459F472AFC63A000736557 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		0B459F492AFC645F00736557 /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
 		0B51A3642AF33F25004D534B /* TableView+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Delegates.swift"; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				0B459F492AFC645F00736557 /* Sender.swift */,
 				0BC2DB1E2B0ACB0500CE02EE /* Conversation.swift */,
 				0BC2DB202B0ACBA200CE02EE /* LatestMessage.swift */,
+				0B3DA96D2B103E8600A08F4F /* Media.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				0B8C9D1C2AE750AE00BCF0A9 /* RegisterViewController+Delegates.swift in Sources */,
 				0B6F66C52ACCE5F500494059 /* ConversationsViewController.swift in Sources */,
 				0B94A3822AEF30FF003C39C0 /* DatabaseManager.swift in Sources */,
+				0B3DA96E2B103E8600A08F4F /* Media.swift in Sources */,
 				0B459F4A2AFC645F00736557 /* Sender.swift in Sources */,
 				0B6F66DA2ACCED9B00494059 /* Coordinator.swift in Sources */,
 				0B51A3652AF33F25004D534B /* TableView+Delegates.swift in Sources */,

@@ -97,7 +97,15 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+}
+
+extension ChatViewController: MessageCellDelegate{
+    
+    func didTapImage(in cell: MessageCollectionViewCell) {
+        guard let indexPath = messagesCollectionView.indexPath(for: cell) else{
+            return
+        }
         let message = messages[indexPath.section]
         
         switch message.kind {
@@ -105,7 +113,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
             guard let imageUrl = media.url else{
                 return
             }
-            let vc = PhotoViwerViewController()
+            let vc = PhotoViwerViewController(with: imageUrl)
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break

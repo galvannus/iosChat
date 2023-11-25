@@ -15,12 +15,12 @@ extension NewConversationViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewConversationTableViewCell.id, for: indexPath) as?
-        NewConversationTableViewCell else{
-            fatalError("Could not cast NewConversationTableViewCell")
-        }
-        //cell.textLabel?.text = results[indexPath.row]["name"]
-        cell.setUp(name: results[indexPath.row]["name"] ?? "")
+        let model = results[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewConversationTableViewCell.id, for: indexPath) as!
+        NewConversationTableViewCell
+        //cell.textLabel?.text = results[indexPath.row].name
+        //cell.setUp(name: results[indexPath.row]["name"] ?? "")
+        cell.configure(with: model)
         
         return cell
     }
@@ -35,5 +35,8 @@ extension NewConversationViewController: UITableViewDelegate, UITableViewDataSou
         })
         
         
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        55
     }
 }

@@ -14,9 +14,9 @@ class NewConversationViewController: UIViewController {
     private var spinner: JGProgressHUD!
     private var noResultsLabel: UILabel!
     private var users = [[String: String]]()
-    var results = [[String: String]]()
+    var results = [SearchResult]()
     private var hasFetched = false
-    public var completion: (([String: String]) -> (Void))?
+    public var completion: ((SearchResult) -> (Void))?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,18 +116,29 @@ extension NewConversationViewController: UISearchBarDelegate {
     func filterUsers(width term: String) {
         print("Filter users")
         // Update the UI: either show results or show no results label
-        guard hasFetched else {
+        guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String, hasFetched else {
             return
         }
+        
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)
 
         spinner.dismiss()
 
-        let results: [[String: String]] = users.filter({
+        let results: [SearchResult] = users.filter({
+            //Show only diffrents users
+            guard let email = $0["email"], email != safeEmail else{
+                return false
+            }
             guard let name = $0["name"]?.lowercased() else {
                 return false
             }
 
             return name.hasPrefix(term.lowercased())
+        }).compactMap({
+            guard let email = $0["email"], let name = $0["name"] else {
+                return nil
+            }
+            return SearchResult(name: name, email: email)
         })
 
         self.results = results

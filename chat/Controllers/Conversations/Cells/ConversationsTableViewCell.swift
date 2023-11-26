@@ -36,7 +36,7 @@ class ConversationsTableViewCell: UITableViewCell {
         userImageView.layer.masksToBounds = true
         userImageView.layer.cornerRadius = 30 // Borde del elemento
         userImageView.clipsToBounds = true // Activar bordes
-        userImageView.backgroundColor = .blue
+        //userImageView.backgroundColor = .blue
 
         userNameLabel.font = .systemFont(ofSize: 18, weight: .semibold)
 

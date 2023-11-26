@@ -12,8 +12,9 @@ import UIKit
 class ConversationsViewController: UIViewController {
     private var tableView: UITableView!
     var spinner: JGProgressHUD!
-    
+
     var conversations = [Conversation]()
+    private var loginObserver: NSObjectProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,14 @@ class ConversationsViewController: UIViewController {
         setUpLayout()
         fetchConversations()
         startListeningForConversations()
+
+        loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main, using: { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.startListeningForConversations()
+        })
     }
 
     private func validateAuth() {
@@ -90,27 +99,32 @@ class ConversationsViewController: UIViewController {
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    private func startListeningForConversations(){
-        guard let email = UserDefaults.standard.value(forKey: "email") as? String else{
+
+    private func startListeningForConversations() {
+        guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
             return
         }
+
+        if let observer = loginObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+
         print("Starting conversation fetch.")
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
         DatabaseManager.shared.getAllConversations(for: safeEmail, completion: { [weak self] result in
             switch result {
-            case .success(let conversations):
+            case let .success(conversations):
                 print("suceesfully got conversation models")
-                guard !conversations.isEmpty else{
+                guard !conversations.isEmpty else {
                     return
                 }
-                
+
                 self?.conversations = conversations
-                
+
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("Failed to get conversations: \(error)")
             }
         })

@@ -21,7 +21,7 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
         }
         
         cell.configure(with: model)
-        cell.accessoryType = .disclosureIndicator
+        //cell.accessoryType = .disclosureIndicator
 
         return cell
     }

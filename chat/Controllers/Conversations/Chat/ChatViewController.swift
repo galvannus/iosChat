@@ -48,7 +48,7 @@ class ChatViewController: MessagesViewController {
         // messages.append(Message(messageId: "1", sentDate: Date(), kind: .text("Hello World Message"), sender: selfSender))
         // messages.append(Message(messageId: "1", sentDate: Date(), kind: .text("Hello World Message Hello World Message Hello World Message"), sender: selfSender))
 
-        view.backgroundColor = .red
+        view.backgroundColor = .systemBackground
 
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self

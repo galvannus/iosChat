@@ -22,7 +22,7 @@ class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         title = "Register"
 
         setUpView()
@@ -70,7 +70,7 @@ class RegisterViewController: UIViewController {
         firstNameField.placeholder = "First Name..."
         firstNameField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         firstNameField.leftViewMode = .always
-        firstNameField.backgroundColor = .white
+        firstNameField.backgroundColor = .secondarySystemBackground
 
         lastNameField = UITextField()
         lastNameField.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +84,7 @@ class RegisterViewController: UIViewController {
         lastNameField.placeholder = "Last Name..."
         lastNameField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         lastNameField.leftViewMode = .always
-        lastNameField.backgroundColor = .white
+        lastNameField.backgroundColor = .secondarySystemBackground
 
         emailField = UITextField()
         emailField.translatesAutoresizingMaskIntoConstraints = false
@@ -98,7 +98,7 @@ class RegisterViewController: UIViewController {
         emailField.placeholder = "Email Adress..."
         emailField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         emailField.leftViewMode = .always
-        emailField.backgroundColor = .white
+        emailField.backgroundColor = .secondarySystemBackground
 
         passwordField = UITextField()
         passwordField.translatesAutoresizingMaskIntoConstraints = false
@@ -112,7 +112,7 @@ class RegisterViewController: UIViewController {
         passwordField.placeholder = "Password..."
         passwordField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         passwordField.leftViewMode = .always
-        passwordField.backgroundColor = .white
+        passwordField.backgroundColor = .secondarySystemBackground
         passwordField.isSecureTextEntry = true
 
         registerButton = UIButton()

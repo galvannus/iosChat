@@ -18,20 +18,20 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.id, for: indexPath) as?
-            TableViewCell else {
-            fatalError("Could not cast MainTableViewCell")
-        }
+        let viewModel = data[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.id, for: indexPath) as! TableViewCell
 
-        cell.setUp(name: data[indexPath.row])
-
+        //cell.setUp(name: data[indexPath.row])
+        cell.setUp(with: viewModel)
+        
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        data[indexPath.row].handler?()
 
-        let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        /*let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { [weak self] _ in
             guard let strongSelf = self else {
                 return
@@ -57,6 +57,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 
         present(actionSheet, animated: true)
+         */
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

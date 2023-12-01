@@ -8,6 +8,7 @@
 import InputBarAccessoryView
 import MessageKit
 import UIKit
+import CoreLocation
 
 class ChatViewController: MessagesViewController {
     public static let dateFormatter: DateFormatter = {
@@ -83,9 +84,49 @@ class ChatViewController: MessagesViewController {
         actionSheet.addAction(UIAlertAction(title: "Audio", style: .default, handler: { _ in
 
         }))
+        actionSheet.addAction(UIAlertAction(title: "Location", style: .default, handler: { [weak self] _ in
+            self?.presentLocationPicker()
+        }))
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .default))
 
         present(actionSheet, animated: true)
+    }
+
+    private func presentLocationPicker() {
+        let vc = LocationPickerViewController(coordinates: nil)
+        vc.title = "Pick Location"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.completion = { [weak self] selectedCoordinates in
+            
+            guard let strongSelf = self else{
+                return
+            }
+            
+            guard let messageId = strongSelf.createMessageId(), let conversationId = strongSelf.conversationId,
+                  let name = strongSelf.title,
+                  let selfSender = strongSelf.selfSender else {
+                return
+            }
+            
+            let longitude: Double = selectedCoordinates.longitude
+            let latitude: Double = selectedCoordinates.latitude
+
+            print("long=\(longitude) / lat=\(latitude)")
+
+            let location = Location(location: CLLocation(latitude: latitude, longitude: longitude), size: .zero)
+
+            let message = Message(messageId: messageId, sentDate: Date(), kind: .location(location), sender: selfSender)
+
+            DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: strongSelf.otherUserEmail, name: name, newMessage: message,
+                                               completion: { success in
+                                                   if success {
+                                                       print("Sent location message")
+                                                   } else {
+                                                       print("Failed to send location message")
+                                                   }
+                                               })
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     private func presentPhotoInputActionSheet() {

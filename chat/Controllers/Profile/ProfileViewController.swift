@@ -5,16 +5,59 @@
 //  Created by Jorge Alejndro Marcial Galvan on 11/10/23.
 //
 
-import FirebaseAuth
+
 import UIKit
+import SDWebImage
+import FBSDKLoginKit
+import FirebaseAuth
+import GoogleSignIn
 
 class ProfileViewController: UIViewController {
     private var tableView: UITableView = UITableView()
 
-    let data = ["Log Out"]
+    var data = [ProfileViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        data.append(ProfileViewModel(viewModelType: .info,
+                                     title: "Name: \(UserDefaults.standard.value(forKey: "name") as? String ?? "No Name")",
+                                    handler: nil))
+        data.append(ProfileViewModel(viewModelType: .info,
+                                     title: "Email: \(UserDefaults.standard.value(forKey: "email") as? String ?? "No Email")",
+                                    handler: nil))
+        data.append(ProfileViewModel(viewModelType: .logout, title: "Log Out", handler: { [weak self] in
+            
+            guard let strongSelf = self else{
+                return
+            }
+            let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+            actionSheet.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                
+                //Log out Facebook
+                FBSDKLoginKit.LoginManager().logOut()
+                
+                //Log out Google
+                GIDSignIn.sharedInstance.signOut()
+                
+                do {
+                    try FirebaseAuth.Auth.auth().signOut()
+
+                    let vc = LoginViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    strongSelf.present(nav, animated: true)
+                } catch {
+                    print("Failed to log out.")
+                }
+            }))
+            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+            strongSelf.present(actionSheet, animated: true)
+        }))
 
         // Do any additional setup after loading the view.
         view.backgroundColor = .systemGray6
@@ -67,29 +110,16 @@ class ProfileViewController: UIViewController {
         
         headerView.addSubview(imageView)
         
-        StorageManager.shared.downloadURL(for: path, completion: { [weak self] result in
+        StorageManager.shared.downloadURL(for: path, completion: { result in
             switch result{
             case .success(let url):
-                self?.downloadImage(imageView: imageView, url: url)
+                imageView.sd_setImage(with: url, completed: nil)
             case .failure(let error):
                 print("Failet to get download url: \(error)")
             }
         })
         
         return headerView
-    }
-    
-    func downloadImage(imageView: UIImageView, url: URL){
-        URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
-            guard let data = data, error == nil else{
-                return
-            }
-            
-            DispatchQueue.main.async {
-                let image = UIImage(data: data)
-                imageView.image = image
-            }
-        }).resume()
     }
 }
 

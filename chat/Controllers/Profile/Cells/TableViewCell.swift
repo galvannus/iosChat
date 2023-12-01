@@ -11,7 +11,7 @@ class TableViewCell: UITableViewCell {
     static let id = "TableViewCell"
 
     var titleLabel: UILabel = UILabel()
-
+    /*
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -49,5 +49,17 @@ class TableViewCell: UITableViewCell {
     // Configuración de los elementos de la celda
     func setUp(name: String) {
         titleLabel.text = name
+    }
+    */
+    public func setUp(with viewModel: ProfileViewModel){
+        self.textLabel?.text = viewModel.title //TODO: Deprecated
+        switch viewModel.viewModelType {
+        case .info:
+            self.titleLabel.textAlignment = .left
+            self.selectionStyle = .none
+        case .logout:
+            self.textLabel?.textColor = .red
+            self.textLabel?.textAlignment = .center
+        }
     }
 }

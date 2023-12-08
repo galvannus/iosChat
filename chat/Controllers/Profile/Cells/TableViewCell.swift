@@ -11,12 +11,12 @@ class TableViewCell: UITableViewCell {
     static let id = "TableViewCell"
 
     var titleLabel: UILabel = UILabel()
-    /*
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         selectionStyle = .none
-        backgroundColor = .clear
-        contentView.backgroundColor = .white // contentVew la vista general
+        contentView.backgroundColor = .systemBackground // contentVew la vista general
 
         setUpView()
     }
@@ -28,7 +28,7 @@ class TableViewCell: UITableViewCell {
     private func setUpView() {
         // Configuración de elementos UI
 
-        titleLabel.textColor = .systemGreen
+        //titleLabel.textColor = .systemGreen
         titleLabel.font = .systemFont(ofSize: 16, weight: .regular)
 
         // Agregar nuevos items a la vista y aregar configuracion
@@ -36,30 +36,25 @@ class TableViewCell: UITableViewCell {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-
-        // Configuración de los constraints
-        NSLayoutConstraint.activate([
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            /* titleLabel.widthAnchor.constraint(equalToConstant: 100),
-                titleLabel.heightAnchor.constraint(equalToConstant: 40), */
-        ])
     }
-
-    // Configuración de los elementos de la celda
-    func setUp(name: String) {
-        titleLabel.text = name
-    }
-    */
+    
     public func setUp(with viewModel: ProfileViewModel){
-        self.textLabel?.text = viewModel.title //TODO: Deprecated
+        titleLabel.text = viewModel.title
         switch viewModel.viewModelType {
         case .info:
-            self.titleLabel.textAlignment = .left
-            self.selectionStyle = .none
+            // Configuración de los constraints
+            NSLayoutConstraint.activate([
+                titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
+            ])
         case .logout:
-            self.textLabel?.textColor = .red
-            self.textLabel?.textAlignment = .center
+            titleLabel.textColor = .red
+            //titleLabel.textAlignment = .center
+            // Configuración de los constraints
+            NSLayoutConstraint.activate([
+                titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+            ])
         }
     }
 }

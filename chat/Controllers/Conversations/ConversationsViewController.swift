@@ -11,6 +11,7 @@ import UIKit
 
 class ConversationsViewController: UIViewController {
     private var tableView: UITableView!
+    private var noConversationsLabel: UILabel!
     var spinner: JGProgressHUD!
 
     var conversations = [Conversation]()
@@ -19,15 +20,8 @@ class ConversationsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        validateAuth()
+        
         setUpView()
-        setUpLayout()
-        fetchConversations()
         startListeningForConversations()
 
         loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main, using: { [weak self] _ in
@@ -37,6 +31,17 @@ class ConversationsViewController: UIViewController {
 
             strongSelf.startListeningForConversations()
         })
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setUpLayout()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        validateAuth()
     }
 
     private func validateAuth() {
@@ -59,6 +64,13 @@ class ConversationsViewController: UIViewController {
         tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
+        
+        noConversationsLabel = UILabel()
+        noConversationsLabel.translatesAutoresizingMaskIntoConstraints = false
+        noConversationsLabel.text = "No conversations!!"
+        noConversationsLabel.textColor = .gray
+        noConversationsLabel.font = .systemFont(ofSize: 21, weight: .medium)
+        noConversationsLabel.isHidden = true
 
         spinner = JGProgressHUD()
         spinner.style = .dark
@@ -66,17 +78,18 @@ class ConversationsViewController: UIViewController {
 
     private func setUpLayout() {
         view.addSubview(tableView)
+        view.addSubview(noConversationsLabel)
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            //noConversationsLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            noConversationsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            noConversationsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-    }
-
-    private func fetchConversations() {
-        tableView.isHidden = false
     }
 
     @objc private func didTapComposeButton() {
@@ -151,15 +164,21 @@ class ConversationsViewController: UIViewController {
             case let .success(conversations):
                 print("suceesfully got conversation models")
                 guard !conversations.isEmpty else {
+                    self?.tableView.isHidden = true
+                    self?.noConversationsLabel.isHidden = false
                     return
                 }
 
+                self?.tableView.isHidden = false
+                self?.noConversationsLabel.isHidden = true
                 self?.conversations = conversations
 
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
             case let .failure(error):
+                self?.tableView.isHidden = true
+                self?.noConversationsLabel.isHidden = false
                 print("Failed to get conversations: \(error)")
             }
         })

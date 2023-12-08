@@ -18,8 +18,10 @@ class ChatViewController: MessagesViewController {
         return formatter
     }()
 
+    var senderPhotoURL: URL?
+    var otherUserPhotoURL: URL?
     public let otherUserEmail: String
-    public let conversationId: String?
+    public var conversationId: String?
     public var isNewConversation = false
 
     var messages = [Message]()
@@ -186,7 +188,7 @@ class ChatViewController: MessagesViewController {
         }
     }
 
-    private func listenForMessages(id: String, shouldScrollToBottom: Bool) {
+    func listenForMessages(id: String, shouldScrollToBottom: Bool) {
         DatabaseManager.shared.getAllMessagesForConversation(with: id, completion: { [weak self] result in
             switch result {
             case let .success(messages):

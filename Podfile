@@ -10,6 +10,8 @@ target 'chat' do
   pod 'FirebaseAuth'
   pod 'FirebaseDatabase'
   pod 'FirebaseStorage'
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseCrashlytics'
 
   # Facebook
   pod 'FBSDKLoginKit', '~> 16.2'
